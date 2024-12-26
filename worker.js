@@ -65,6 +65,7 @@ async function makeRequest(url, params, method = 'POST') {
 
 function mapSessionCode(sessionCode) {
     const sessionMapping = {
+        "E25": "Odd-(2024-25)",
         "S24": "Supplementary 2023-24",
         "E24": "Even-(2023-24)",
         "O24": "Odd-(2023-24)",
@@ -289,6 +290,7 @@ async function handleAllSession() {
 
 function getShortCode(sessionName) {
     const shortCodeMapping = {
+        "Odd-(2024-25)": "E25",
         "Supplementary 2023-24": "S24",
         "Even-(2023-24)": "E24",
         "Odd-(2023-24)": "O24",
