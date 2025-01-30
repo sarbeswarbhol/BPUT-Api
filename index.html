@@ -39,6 +39,13 @@
             padding-bottom: 5px;
         }
 
+        h3 {
+            color: #007bff;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
         p {
             font-size: 16px;
             margin-bottom: 15px;
@@ -50,16 +57,6 @@
             border-radius: 8px;
             margin-bottom: 20px;
             border-left: 4px solid #007bff;
-        }
-
-        .endpoint h3 {
-            margin: 0;
-            font-size: 20px;
-            color: #007bff;
-        }
-
-        .endpoint p {
-            margin: 10px 0;
         }
 
         .code-block {
@@ -108,11 +105,24 @@
 <body>
     <div class="container">
         <h1>BPUT Results API Documentation</h1>
-        <p>Welcome to the BPUT Results API! This API provides access to student results, details, and SGPA information from BPUT (Biju Patnaik University of Technology). Below are the available endpoints and how to use them.</p>
+        <p>Welcome to the BPUT Results API! This API provides access to student results, details, and SGPA information from BPUT (Biju Patnaik University of Technology). Below are the available endpoints, detailed usage instructions, and additional information to help you get started.</p>
 
         <div class="note">
             <strong>Note:</strong> Replace placeholders like <code>&lt;rollno&gt;</code>, <code>&lt;semid&gt;</code>, <code>&lt;session&gt;</code>, and <code>&lt;dob&gt;</code> with actual values.
         </div>
+
+        <!-- Table of Contents -->
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#endpoints">Endpoints</a></li>
+            <li><a href="#error-handling">Error Handling</a></li>
+            <li><a href="#rate-limits">Rate Limits</a></li>
+            <li><a href="#best-practices">Best Practices</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ul>
+
+        <!-- Endpoints Section -->
+        <h2 id="endpoints">Endpoints</h2>
 
         <!-- Student Details Endpoint -->
         <div class="endpoint">
@@ -121,6 +131,10 @@
             <div class="code-block">
                 <span class="method">GET</span> <span class="url">/details?rollno=&lt;rollno&gt;</span>
             </div>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>rollno</code>: The student's roll number (required).</li>
+            </ul>
             <p><strong>Example Request:</strong></p>
             <div class="code-block">
                 <span class="method">GET</span> <span class="url">/details?rollno=1234567890</span>
@@ -188,6 +202,12 @@
             <div class="code-block">
                 <span class="method">GET</span> <span class="url">/examinfo?rollno=&lt;rollno&gt;&amp;dob=&lt;dob&gt;&amp;session=&lt;session&gt;</span>
             </div>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>rollno</code>: The student's roll number (required).</li>
+                <li><code>dob</code>: The student's date of birth in YYYY-MM-DD format (default: 2009-07-14).</li>
+                <li><code>session</code>: The exam session (default: E24).</li>
+            </ul>
             <p><strong>Example Request:</strong></p>
             <div class="code-block">
                 <span class="method">GET</span> <span class="url">/examinfo?rollno=1234567890&amp;dob=2000-01-01&amp;session=E24</span>
@@ -209,6 +229,12 @@
             <div class="code-block">
                 <span class="method">GET</span> <span class="url">/sgpa?rollno=&lt;rollno&gt;&amp;semid=&lt;semid&gt;&amp;session=&lt;session&gt;</span>
             </div>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>rollno</code>: The student's roll number (required).</li>
+                <li><code>semid</code>: The semester ID (default: 4).</li>
+                <li><code>session</code>: The exam session (default: E24).</li>
+            </ul>
             <p><strong>Example Request:</strong></p>
             <div class="code-block">
                 <span class="method">GET</span> <span class="url">/sgpa?rollno=1234567890&amp;semid=4&amp;session=E24</span>
@@ -245,6 +271,12 @@
             <div class="code-block">
                 <span class="method">GET</span> <span class="url">/combined?rollno=&lt;rollno&gt;&amp;semid=&lt;semid&gt;&amp;session=&lt;session&gt;</span>
             </div>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>rollno</code>: The student's roll number (required).</li>
+                <li><code>semid</code>: The semester ID (default: 4).</li>
+                <li><code>session</code>: The exam session (default: E24).</li>
+            </ul>
             <p><strong>Example Request:</strong></p>
             <div class="code-block">
                 <span class="method">GET</span> <span class="url">/combined?rollno=1234567890&amp;semid=4&amp;session=E24</span>
@@ -278,6 +310,49 @@
                 }
             </div>
         </div>
+
+        <!-- Error Handling Section -->
+        <h2 id="error-handling">Error Handling</h2>
+        <p>If an error occurs, the API will return a JSON response with an <code>error</code> field containing the error message. Common errors include:</p>
+        <ul>
+            <li><strong>400 Bad Request</strong>: Missing or invalid parameters.</li>
+            <li><strong>404 Not Found</strong>: The requested resource does not exist.</li>
+            <li><strong>500 Internal Server Error</strong>: Something went wrong on the server.</li>
+        </ul>
+        <p><strong>Example Error Response:</strong></p>
+        <div class="code-block">
+            {
+                "error": "Missing required parameter: rollno"
+            }
+        </div>
+
+        <!-- Rate Limits Section -->
+        <h2 id="rate-limits">Rate Limits</h2>
+        <p>To ensure fair usage, the API has a rate limit of <strong>100 requests per minute</strong> per IP address. If you exceed this limit, you will receive a <strong>429 Too Many Requests</strong> response.</p>
+        <div class="code-block">
+            {
+                "error": "Rate limit exceeded. Please try again in 60 seconds."
+            }
+        </div>
+
+        <!-- Best Practices Section -->
+        <h2 id="best-practices">Best Practices</h2>
+        <ul>
+            <li>Always validate input parameters before making requests.</li>
+            <li>Use the <code>html=true</code> parameter only when you need HTML output.</li>
+            <li>Cache responses locally to reduce the number of API calls.</li>
+            <li>Handle errors gracefully in your application.</li>
+        </ul>
+
+        <!-- Troubleshooting Section -->
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <p>If you encounter issues, follow these steps:</p>
+        <ol>
+            <li>Check the error message in the response.</li>
+            <li>Verify that all required parameters are provided and valid.</li>
+            <li>Ensure you are not exceeding the rate limit.</li>
+            <li>If the issue persists, contact support with the request details.</li>
+        </ol>
 
         <div class="footer">
             &copy; 2025 BPUT Results API. All rights reserved.
