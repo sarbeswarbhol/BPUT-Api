@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPUT Results API Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #00d2ff, #3a7bd5);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .endpoint {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+
+        .endpoint h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #007bff;
+        }
+
+        .endpoint p {
+            margin: 10px 0;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .code-block .comment {
+            color: #6a9955;
+        }
+
+        .code-block .method {
+            color: #569cd6;
+        }
+
+        .code-block .url {
+            color: #ce9178;
+        }
+
+        .note {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #0056b3;
+        }
+
+        .note strong {
+            color: #007bff;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BPUT Results API Documentation</h1>
+        <p>Welcome to the BPUT Results API! This API provides access to student results, details, and SGPA information from BPUT (Biju Patnaik University of Technology). Below are the available endpoints and how to use them.</p>
+
+        <div class="note">
+            <strong>Note:</strong> Replace placeholders like <code>&lt;rollno&gt;</code>, <code>&lt;semid&gt;</code>, <code>&lt;session&gt;</code>, and <code>&lt;dob&gt;</code> with actual values.
+        </div>
+
+        <!-- Student Details Endpoint -->
+        <div class="endpoint">
+            <h3>1. Student Details</h3>
+            <p>Fetch student details using their roll number.</p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/details?rollno=&lt;rollno&gt;</span>
+            </div>
+            <p><strong>Example Request:</strong></p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/details?rollno=1234567890</span>
+            </div>
+            <p><strong>Example Response:</strong></p>
+            <div class="code-block">
+                {
+                    "studentName": "John Doe",
+                    "rollNo": "1234567890",
+                    "program": "B.Tech in Computer Science",
+                    "college": "Some College"
+                }
+            </div>
+        </div>
+
+        <!-- Student Results Endpoint -->
+        <div class="endpoint">
+            <h3>2. Student Results</h3>
+            <p>Fetch subject-wise results for a student. You can also request the results in HTML format by adding the <code>html=true</code> parameter.</p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/results?rollno=&lt;rollno&gt;&amp;semid=&lt;semid&gt;&amp;session=&lt;session&gt;&amp;html=&lt;true|false&gt;</span>
+            </div>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>rollno</code>: The student's roll number (required).</li>
+                <li><code>semid</code>: The semester ID (default: 4).</li>
+                <li><code>session</code>: The exam session (default: E24).</li>
+                <li><code>html</code>: Set to <code>true</code> to get results in HTML format (optional).</li>
+            </ul>
+            <p><strong>Example Request (JSON):</strong></p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/results?rollno=1234567890&amp;semid=4&amp;session=E24</span>
+            </div>
+            <p><strong>Example Response (JSON):</strong></p>
+            <div class="code-block">
+                [
+                    {
+                        "subjectCODE": "CS101",
+                        "subjectName": "Introduction to Computer Science",
+                        "subjectCredits": "4",
+                        "grade": "A"
+                    },
+                    {
+                        "subjectCODE": "MA101",
+                        "subjectName": "Mathematics I",
+                        "subjectCredits": "3",
+                        "grade": "B"
+                    }
+                ]
+            </div>
+            <p><strong>Example Request (HTML):</strong></p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/results?rollno=1234567890&amp;semid=4&amp;session=E24&amp;html=true</span>
+            </div>
+            <p><strong>Example Response (HTML):</strong></p>
+            <div class="code-block">
+                <span class="comment">&lt;!-- Rendered HTML page with student details, results, and SGPA --&gt;</span>
+            </div>
+        </div>
+
+        <!-- Exam Information Endpoint -->
+        <div class="endpoint">
+            <h3>3. Exam Information</h3>
+            <p>Fetch exam-related information for a student.</p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/examinfo?rollno=&lt;rollno&gt;&amp;dob=&lt;dob&gt;&amp;session=&lt;session&gt;</span>
+            </div>
+            <p><strong>Example Request:</strong></p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/examinfo?rollno=1234567890&amp;dob=2000-01-01&amp;session=E24</span>
+            </div>
+            <p><strong>Example Response:</strong></p>
+            <div class="code-block">
+                {
+                    "examName": "End Semester Examination",
+                    "examDate": "2023-12-15",
+                    "status": "Completed"
+                }
+            </div>
+        </div>
+
+        <!-- SGPA Details Endpoint -->
+        <div class="endpoint">
+            <h3>4. SGPA Details</h3>
+            <p>Fetch the SGPA (Semester Grade Point Average) for a student.</p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/sgpa?rollno=&lt;rollno&gt;&amp;semid=&lt;semid&gt;&amp;session=&lt;session&gt;</span>
+            </div>
+            <p><strong>Example Request:</strong></p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/sgpa?rollno=1234567890&amp;semid=4&amp;session=E24</span>
+            </div>
+            <p><strong>Example Response:</strong></p>
+            <div class="code-block">
+                {
+                    "sgpa": "9.2"
+                }
+            </div>
+        </div>
+
+        <!-- All Sessions Endpoint -->
+        <div class="endpoint">
+            <h3>5. All Sessions</h3>
+            <p>Fetch a list of all available exam sessions.</p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/allsession</span>
+            </div>
+            <p><strong>Example Response:</strong></p>
+            <div class="code-block">
+                [
+                    { "name": "Odd-(2024-25)", "shortCode": "O25" },
+                    { "name": "Supplementary 2023-24", "shortCode": "S24" },
+                    { "name": "Even-(2023-24)", "shortCode": "E24" }
+                ]
+            </div>
+        </div>
+
+        <!-- Combined Data Endpoint -->
+        <div class="endpoint">
+            <h3>6. Combined Data</h3>
+            <p>Fetch student details, subject results, and SGPA in a single request.</p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/combined?rollno=&lt;rollno&gt;&amp;semid=&lt;semid&gt;&amp;session=&lt;session&gt;</span>
+            </div>
+            <p><strong>Example Request:</strong></p>
+            <div class="code-block">
+                <span class="method">GET</span> <span class="url">/combined?rollno=1234567890&amp;semid=4&amp;session=E24</span>
+            </div>
+            <p><strong>Example Response:</strong></p>
+            <div class="code-block">
+                {
+                    "studentDetails": {
+                        "studentName": "John Doe",
+                        "rollNo": "1234567890",
+                        "program": "B.Tech in Computer Science",
+                        "college": "Some College"
+                    },
+                    "subjectResults": [
+                        {
+                            "subjectCODE": "CS101",
+                            "subjectName": "Introduction to Computer Science",
+                            "subjectCredits": "4",
+                            "grade": "A"
+                        },
+                        {
+                            "subjectCODE": "MA101",
+                            "subjectName": "Mathematics I",
+                            "subjectCredits": "3",
+                            "grade": "B"
+                        }
+                    ],
+                    "sgpaDetails": {
+                        "sgpa": "9.2"
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2023 BPUT Results API. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
