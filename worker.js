@@ -1,7 +1,7 @@
 // Global Constants
 const BASE_URL = "https://results.bput.ac.in";
 // const FALLBACK_URL = "http://results.bput.co.in"; // Uncomment to enable fallback
-const GITHUB_HTML_URL = "https://raw.githubusercontent.com/Arctixinc/BPUT-CheatCode/api/templates/index.html";
+const GITHUB_HTML_URL = "https://raw.githubusercontent.com/sarbeswarbhol/BPUT-Api/template/index.html";
 const SESSION_MAPPING = {
     "O25": "Odd-(2024-25)", "S24": "Supplementary 2023-24", "E24": "Even-(2023-24)", "O24": "Odd-(2023-24)",
     "S23": "Supplementary 2022-23", "E23": "Even-(2022-23)", "O23": "Odd-(2022-23)", "S22": "Supplementary 2021-22",
