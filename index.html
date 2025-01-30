@@ -116,7 +116,6 @@
         <ul>
             <li><a href="#endpoints">Endpoints</a></li>
             <li><a href="#error-handling">Error Handling</a></li>
-            <li><a href="#rate-limits">Rate Limits</a></li>
             <li><a href="#best-practices">Best Practices</a></li>
             <li><a href="#troubleshooting">Troubleshooting</a></li>
         </ul>
@@ -326,15 +325,7 @@
             }
         </div>
 
-        <!-- Rate Limits Section -->
-        <h2 id="rate-limits">Rate Limits</h2>
-        <p>To ensure fair usage, the API has a rate limit of <strong>100 requests per minute</strong> per IP address. If you exceed this limit, you will receive a <strong>429 Too Many Requests</strong> response.</p>
-        <div class="code-block">
-            {
-                "error": "Rate limit exceeded. Please try again in 60 seconds."
-            }
-        </div>
-
+    
         <!-- Best Practices Section -->
         <h2 id="best-practices">Best Practices</h2>
         <ul>
