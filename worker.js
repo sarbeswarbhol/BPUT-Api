@@ -3,6 +3,7 @@ const BASE_URL = "https://results.bput.ac.in";
 // const FALLBACK_URL = "http://results.bput.co.in"; // Uncomment to enable fallback
 const GITHUB_HTML_URL = "https://raw.githubusercontent.com/sarbeswarbhol/BPUT-Api/template/index.html";
 const SESSION_MAPPING = {
+    "E25": "Even-(2024-25)", "S25": "Supplementary 2024-25",
     "O25": "Odd-(2024-25)", "S24": "Supplementary 2023-24", "E24": "Even-(2023-24)", "O24": "Odd-(2023-24)",
     "S23": "Supplementary 2022-23", "E23": "Even-(2022-23)", "O23": "Odd-(2022-23)", "S22": "Supplementary 2021-22",
     "R22": "Re-ExamOdd (2021-22)", "E22": "Even-(2021-22)", "O22": "Odd-(2021-22)", "S21": "Supplementary 2020-21",
